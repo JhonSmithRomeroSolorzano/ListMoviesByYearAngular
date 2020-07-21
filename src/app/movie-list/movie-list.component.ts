@@ -1,16 +1,28 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { MoviesService } from "../movies.service";
 
 @Component({
-  selector: 'app-movie-list',
-  templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.scss']
+  selector: "app-movie-list",
+  templateUrl: "./movie-list.component.html",
+  styleUrls: ["./movie-list.component.scss"],
 })
 export class MovieListComponent implements OnInit {
-  movies : Movie[];
+  movies: Movie[] = null;
+  public movieYear: number;
 
-  ngOnInit() {
+  constructor(private moviesService: MoviesService) {}
+
+  ngOnInit() {}
+
+  public async searchMovies(event, movieYear) {
+    try {
+      const movieList = await this.moviesService.getMoviesbyYear(movieYear);
+      this.movies = movieList.data;
+    } catch (error) {
+      console.error(error);
+      this.movies = [];
+    }
   }
-
 }
 
 export interface Movie {
