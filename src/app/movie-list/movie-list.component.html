@@ -1,8 +1,9 @@
 <div class="layout-column align-items-center mt-50">
   <section class="layout-row align-items-center justify-content-center">
     <input
+      #appInput
       type="number"
-      [(ngModel)]="movieYear"
+      [value]="movieYear"
       class="large"
       placeholder="Enter Year eg 2015"
       data-test-id="app-input"
@@ -10,7 +11,7 @@
     <button
       class=""
       data-test-id="submit-button"
-      (click)="searchMovies($event, movieYear)"
+      (click)="searchMovies($event, appInput.value)"
     >
       Search
     </button>
